@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import NewListForm from './NewListForm'; 
 import List from './List'; 
+import ListItem from './ListItem'; 
 
 class ListsContainer extends Component {
     constructor() {
         super(); 
         this.state = {
-            lists: [{ title: 'ListOne'}, {title: 'ListTwo'}],
+            lists: [{ title: 'ListOne', listItems: ["hello", "goodbye"]}, {title: 'ListTwo', listItems: []}],
             newListFormValue: ""
         }
     }
@@ -30,9 +31,20 @@ class ListsContainer extends Component {
     renderAllLists() {
         return(
             this.state.lists.map( list => {
-                return <List title={list.title}/>
+                return(
+                    <Fragment>
+                        <List title={list.title}/>
+                        {this.renderAllListItems(list.listItems)}
+                    </Fragment>
+                ) 
             })
         )
+    }
+
+    renderAllListItems(listItems) {
+        return listItems.map( listItem => {
+            return <ListItem body={listItem.body} />
+        })
     }
 
     render() {
