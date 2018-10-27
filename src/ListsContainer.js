@@ -13,7 +13,7 @@ class ListsContainer extends Component {
     renderAllLists() {
         return(
             this.state.lists.map( list => {
-                return <List />
+                return <List title={list.title}/>
             })
         )
     }
@@ -23,7 +23,7 @@ class ListsContainer extends Component {
             <div>
                 <div>This is the ListContainer.</div>
                 <NewListForm />
-                this.renderAllLists(); 
+                {this.renderAllLists()}
             </div>
         )
     }

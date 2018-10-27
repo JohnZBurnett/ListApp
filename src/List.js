@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default () => {
+export default ({ title }) => {
     return(
-        <div>This is a List component.</div>
+        <div>This list's title is: {title} </div>
     )
 }
 
