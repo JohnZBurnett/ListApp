@@ -4,12 +4,14 @@ import List from './List';
 import ListItem from './ListItem'; 
 
 class ListsContainer extends Component {
+
     constructor() {
         super(); 
         this.state = {
-            lists: [{ title: 'ListOne', listItems: ["hello", "goodbye"]}, {title: 'ListTwo', listItems: []}],
+            lists: [{ id: 0, title: 'ListOne'}, {id: 1, title: 'ListTwo'}],
             newListFormValue: ""
         }
+        this.id = 0; 
     }
 
     updateNewListFormValue(event) {
@@ -20,7 +22,7 @@ class ListsContainer extends Component {
     }
 
     createNewList() {
-        let newList = { title: this.state.newListFormValue}; 
+        let newList = { title: this.state.newListFormValue, listItems: []}; 
         let updatedArrOfLists = [...this.state.lists, newList];
         this.setState({
             lists: updatedArrOfLists,
@@ -33,18 +35,11 @@ class ListsContainer extends Component {
             this.state.lists.map( list => {
                 return(
                     <Fragment>
-                        <List title={list.title}/>
-                        {this.renderAllListItems(list.listItems)}
+                        <List title={list.title} listItems={list.listItems} listId={list.listId}/>
                     </Fragment>
                 ) 
             })
         )
-    }
-
-    renderAllListItems(listItems) {
-        return listItems.map( listItem => {
-            return <ListItem body={listItem.body} />
-        })
     }
 
     render() {

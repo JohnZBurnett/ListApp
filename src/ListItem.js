@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default () => {
+export default ({ body }) => {
     return(
-        <div>This is a ListItem component.</div>
+        <div>{body}</div>
     )
 }
