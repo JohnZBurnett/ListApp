@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ListItem from './ListItem'; 
+import ListItem from './ListItem';
+import List from './List'; 
 
 
 class ListContainer extends Component {
@@ -42,7 +43,7 @@ class ListContainer extends Component {
         console.log("LIST ID: ", listId); 
         return(
             <div>
-                <div>This list's title is: {title}</div>
+                <List title={title} listId={listId} deleteList={deleteList}/>
             {
                 this.state.listItems.map( listItem => {
                     return <ListItem body={listItem.body} id={listItem.id} deleteListItem={this.deleteListItem.bind(this)}/>

@@ -22,7 +22,7 @@ class ListsContainer extends Component {
     }
 
     createNewList() {
-        let newList = { title: this.state.newListFormValue, listItems: []}; 
+        let newList = { title: this.state.newListFormValue, listItems: [], listId: ++this.id}; 
         let updatedArrOfLists = [...this.state.lists, newList];
         this.setState({
             lists: updatedArrOfLists,
@@ -32,7 +32,7 @@ class ListsContainer extends Component {
 
     deleteList(event, listToDeleteId) {
         let filteredLists = this.state.lists.filter( (list) => {
-            return list.id !== listToDeleteId
+            return list.listId !== listToDeleteId
         })
         this.setState({
             lists: filteredLists
