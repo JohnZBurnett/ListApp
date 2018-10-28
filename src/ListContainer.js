@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ListItem from './ListItem'; 
 
 
-class List extends Component {
+class ListContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -27,6 +27,15 @@ class List extends Component {
         })
 
     }
+    
+    deleteListItem(event, itemToDeleteId) {
+        let filteredListItems = this.state.listItems.filter( listItem => {
+            return listItem.id !== itemToDeleteId; 
+        })
+        this.setState({
+            listItems: filteredListItems
+        })
+    }
 
     render() {
         const { title, listId} = this.props; 
@@ -35,7 +44,7 @@ class List extends Component {
                 <div>This list's title is: {title}</div>
             {
                 this.state.listItems.map( listItem => {
-                    return <ListItem body={listItem.body} id={listItem.id}/>
+                    return <ListItem body={listItem.body} id={listItem.id} deleteListItem={this.deleteListItem.bind(this)}/>
                 })
             }
             <input type="text" value={this.state.listItemFormValue} placeholder="Enter a new list item..." onChange={this.updateListItemForm.bind(this)}></input>
@@ -47,4 +56,4 @@ class List extends Component {
 
 }
 
-export default List 
+export default ListContainer;  

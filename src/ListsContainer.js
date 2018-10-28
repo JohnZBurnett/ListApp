@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import NewListForm from './NewListForm'; 
-import List from './List'; 
+import ListContainer from './ListContainer'; 
 import ListItem from './ListItem'; 
 
 class ListsContainer extends Component {
@@ -35,7 +35,7 @@ class ListsContainer extends Component {
             this.state.lists.map( list => {
                 return(
                     <Fragment>
-                        <List title={list.title} listItems={list.listItems} listId={list.listId}/>
+                        <ListContainer title={list.title} listItems={list.listItems} listId={list.listId}/>
                     </Fragment>
                 ) 
             })
