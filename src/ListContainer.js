@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ListItem from './ListItem';
 import List from './List'; 
+import NewListItemForm from './NewListItemForm'; 
 
 
 class ListContainer extends Component {
@@ -49,9 +50,8 @@ class ListContainer extends Component {
                     return <ListItem body={listItem.body} id={listItem.id} deleteListItem={this.deleteListItem.bind(this)}/>
                 })
             }
-            <input type="text" value={this.state.listItemFormValue} placeholder="Enter a new list item..." onChange={this.updateListItemForm.bind(this)}></input>
-            <button onClick={this.addNewListItem.bind(this)}>Add</button>
-            <button onClick={(event) => {deleteList(event, listId)}}>Delete List</button>
+            <NewListItemForm value={this.state.listItemFormValue} onClick={this.addNewListItem.bind(this)} onChange={this.updateListItemForm.bind(this)}/>
+        
             </div>
         )
     }
