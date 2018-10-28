@@ -8,7 +8,7 @@ class ListsContainer extends Component {
     constructor() {
         super(); 
         this.state = {
-            lists: [{ id: 0, title: 'ListOne'}, {id: 1, title: 'ListTwo'}],
+            lists: [],
             newListFormValue: ""
         }
         this.id = 0; 
@@ -30,12 +30,21 @@ class ListsContainer extends Component {
         });
     }
 
+    deleteList(event, listToDeleteId) {
+        let filteredLists = this.state.lists.filter( (list) => {
+            return list.id !== listToDeleteId
+        })
+        this.setState({
+            lists: filteredLists
+        })
+    }
+
     renderAllLists() {
         return(
             this.state.lists.map( list => {
                 return(
                     <Fragment>
-                        <ListContainer title={list.title} listItems={list.listItems} listId={list.listId}/>
+                        <ListContainer title={list.title} listItems={list.listItems} listId={list.listId} deleteList={this.deleteList.bind(this)}/>
                     </Fragment>
                 ) 
             })

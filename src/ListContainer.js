@@ -38,7 +38,8 @@ class ListContainer extends Component {
     }
 
     render() {
-        const { title, listId} = this.props; 
+        const { title, listId, deleteList} = this.props; 
+        console.log("LIST ID: ", listId); 
         return(
             <div>
                 <div>This list's title is: {title}</div>
@@ -49,6 +50,7 @@ class ListContainer extends Component {
             }
             <input type="text" value={this.state.listItemFormValue} placeholder="Enter a new list item..." onChange={this.updateListItemForm.bind(this)}></input>
             <button onClick={this.addNewListItem.bind(this)}>Add</button>
+            <button onClick={(event) => {deleteList(event, listId)}}>Delete List</button>
             </div>
         )
     }
