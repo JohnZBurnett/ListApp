@@ -9,6 +9,7 @@ class List extends Component {
             listItems: [],
             listItemFormValue: ""
         }
+        this.listItemId = 0; 
     }
 
     updateListItemForm(event) {
@@ -19,7 +20,7 @@ class List extends Component {
     }
 
     addNewListItem() {
-        let listItemsPlusNewItem = [...this.state.listItems, this.state.listItemFormValue]; 
+        let listItemsPlusNewItem = [...this.state.listItems, {body: this.state.listItemFormValue, id: ++this.listItemId}]; 
         this.setState({
             listItems: listItemsPlusNewItem,
             listItemFormValue: ""
@@ -34,7 +35,7 @@ class List extends Component {
                 <div>This list's title is: {title}</div>
             {
                 this.state.listItems.map( listItem => {
-                    return <ListItem body={listItem} />
+                    return <ListItem body={listItem.body} id={listItem.id}/>
                 })
             }
             <input type="text" value={this.state.listItemFormValue} placeholder="Enter a new list item..." onChange={this.updateListItemForm.bind(this)}></input>
