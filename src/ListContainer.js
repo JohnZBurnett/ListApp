@@ -8,7 +8,6 @@ class ListContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            listItems: [],
             listItemFormValue: ""
         }
         this.listItemId = 0; 
@@ -46,18 +45,18 @@ class ListContainer extends Component {
     }
 
     render() {
-        const { title, listId, deleteList, createNewListItem} = this.props; 
+        const { title, listId, deleteList, createNewListItem, listItems} = this.props; 
         console.log("LIST ID: ", listId); 
         console.log("createListItem fn: ", createNewListItem); 
         return(
             <div>
                 <List title={title} listId={listId} deleteList={deleteList}/>
             {
-                this.state.listItems.map( listItem => {
-                    return <ListItem body={listItem.body} id={listItem.id} deleteListItem={this.deleteListItem.bind(this)}/>
+                listItems.map( listItem => {
+                    return <ListItem body={listItem.value} id={listItem.id} deleteListItem={this.deleteListItem.bind(this)}/>
                 })
             }
-            
+
             <NewListItemForm 
               value={this.state.listItemFormValue} 
               clearNewListItemForm={this.clearNewListItemForm} 
