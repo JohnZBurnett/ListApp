@@ -40,7 +40,7 @@ class ListContainer extends Component {
     }
 
     render() {
-        const { title, listId, deleteList} = this.props; 
+        const { title, listId, deleteList, createNewListItem} = this.props; 
         console.log("LIST ID: ", listId); 
         return(
             <div>
@@ -50,7 +50,7 @@ class ListContainer extends Component {
                     return <ListItem body={listItem.body} id={listItem.id} deleteListItem={this.deleteListItem.bind(this)}/>
                 })
             }
-            <NewListItemForm value={this.state.listItemFormValue} onClick={this.addNewListItem.bind(this)} onChange={this.updateListItemForm.bind(this)}/>
+            <NewListItemForm value={this.state.listItemFormValue} onClick={(event) => (createNewListItem(this.state.listItemValue))} onChange={this.updateListItemForm.bind(this)}/>
         
             </div>
         )

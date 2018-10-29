@@ -9,9 +9,10 @@ class ListsContainer extends Component {
         super(); 
         this.state = {
             lists: [],
+            listItems: [],
             newListFormValue: ""
         }
-        this.id = 0; 
+        this.listId = 0; 
     }
 
     updateNewListFormValue(event) {
@@ -22,12 +23,16 @@ class ListsContainer extends Component {
     }
 
     createNewList() {
-        let newList = { title: this.state.newListFormValue, listItems: [], listId: ++this.id}; 
+        let newList = { title: this.state.newListFormValue, listItems: [], listId: "list-" + ++this.listId}; 
         let updatedArrOfLists = [...this.state.lists, newList];
         this.setState({
             lists: updatedArrOfLists,
             newListFormValue: ""
         });
+    }
+
+    createNewListItem = (itemValue) => {
+        console.log("ITEM LIST VALUE: ", itemValue); 
     }
 
     deleteList(event, listToDeleteId) {
@@ -44,7 +49,13 @@ class ListsContainer extends Component {
             this.state.lists.map( list => {
                 return(
                     <Fragment>
-                        <ListContainer title={list.title} listItems={list.listItems} listId={list.listId} deleteList={this.deleteList.bind(this)}/>
+                        <ListContainer 
+                            title={list.title} 
+                            listItems={list.listItems} 
+                            listId={list.listId} 
+                            deleteList={this.deleteList.bind(this)}
+                            createNewListItem={this.createNewListItem}
+                        />
                     </Fragment>
                 ) 
             })
