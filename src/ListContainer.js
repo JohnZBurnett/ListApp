@@ -10,7 +10,6 @@ class ListContainer extends Component {
         this.state = {
             listItemFormValue: ""
         }
-        this.listItemId = 0; 
     }
 
     updateListItemForm(event) {
@@ -20,27 +19,9 @@ class ListContainer extends Component {
         })
     }
 
-    addNewListItem() {
-        let listItemsPlusNewItem = [...this.state.listItems, {body: this.state.listItemFormValue, id: ++this.listItemId}]; 
-        this.setState({
-            listItems: listItemsPlusNewItem,
-            listItemFormValue: ""
-        })
-
-    }
-
     clearNewListItemForm = () => {
         this.setState({
             listItemFormValue: ""
-        })
-    }
-    
-    deleteListItem(event, itemToDeleteId) {
-        let filteredListItems = this.state.listItems.filter( listItem => {
-            return listItem.id !== itemToDeleteId; 
-        })
-        this.setState({
-            listItems: filteredListItems
         })
     }
 

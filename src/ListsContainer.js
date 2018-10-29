@@ -34,8 +34,16 @@ class ListsContainer extends Component {
 
     createNewListItem = (event, itemValue, listId, clearNewListItemForm) => {
         let listItemsPlusNewItem = [...this.state.listItems, { id: "item-" + ++this.listItemId, listId, value: itemValue}]
+        let updatedLists = this.state.lists.map( list => {
+            if (list.listId === listId) {
+                list.listItems.push({ id: "item-" + ++this.listItemId, listId, value: itemValue})
+            }
+            debugger; 
+            return list; 
+        });
         this.setState({
-            listItems: listItemsPlusNewItem
+            listItems: listItemsPlusNewItem,
+            lists: updatedLists
         });
         
         // this fn resides in ListContainer.js where the new list item form is controlled for each list
