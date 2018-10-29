@@ -57,7 +57,14 @@ class ListContainer extends Component {
                     return <ListItem body={listItem.body} id={listItem.id} deleteListItem={this.deleteListItem.bind(this)}/>
                 })
             }
-            <NewListItemForm value={this.state.listItemFormValue} clearNewListItemForm={this.clearNewListItemForm} createNewListItem={createNewListItem} onChange={this.updateListItemForm.bind(this)}/>
+            
+            <NewListItemForm 
+              value={this.state.listItemFormValue} 
+              clearNewListItemForm={this.clearNewListItemForm} 
+              createNewListItem={createNewListItem} 
+              onChange={this.updateListItemForm.bind(this)}
+              listId={listId}
+            />
         
             </div>
         )

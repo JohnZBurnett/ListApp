@@ -13,6 +13,7 @@ class ListsContainer extends Component {
             newListFormValue: ""
         }
         this.listId = 0; 
+        this.listItemId = 0; 
     }
 
     updateNewListFormValue(event) {
@@ -31,9 +32,15 @@ class ListsContainer extends Component {
         });
     }
 
-    createNewListItem = (event, itemValue, clearNewListItemForm) => {
+    createNewListItem = (event, itemValue, listId, clearNewListItemForm) => {
         console.log("ITEM LIST VALUE: ", itemValue);
         console.log("THIS: ", this);  
+        let listItemsPlusNewItem = [...this.state.listItems, { id: "item-" + ++this.listItemId, listId, value: itemValue}]
+        this.setState({
+            listItems: listItemsPlusNewItem
+        });
+        
+        // this fn resides in ListContainer.js where the new list item form is controlled for each list
         clearNewListItemForm(); 
     }
 
@@ -68,7 +75,11 @@ class ListsContainer extends Component {
         return(
             <div>
                 <div>This is the ListContainer.</div>
-                <NewListForm onChange={this.updateNewListFormValue.bind(this)} onClick={this.createNewList.bind(this)} value={this.state.newListFormValue}/>
+                <NewListForm 
+                  onChange={this.updateNewListFormValue.bind(this)} 
+                  onClick={this.createNewList.bind(this)} 
+                  value={this.state.newListFormValue}
+                />
                 {this.renderAllLists()}
             </div>
         )
