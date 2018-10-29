@@ -31,8 +31,10 @@ class ListsContainer extends Component {
         });
     }
 
-    createNewListItem = (itemValue) => {
-        console.log("ITEM LIST VALUE: ", itemValue); 
+    createNewListItem = (event, itemValue, clearNewListItemForm) => {
+        console.log("ITEM LIST VALUE: ", itemValue);
+        console.log("THIS: ", this);  
+        clearNewListItemForm(); 
     }
 
     deleteList(event, listToDeleteId) {

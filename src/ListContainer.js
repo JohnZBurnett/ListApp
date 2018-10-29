@@ -29,6 +29,12 @@ class ListContainer extends Component {
         })
 
     }
+
+    clearNewListItemForm = () => {
+        this.setState({
+            listItemFormValue: ""
+        })
+    }
     
     deleteListItem(event, itemToDeleteId) {
         let filteredListItems = this.state.listItems.filter( listItem => {
@@ -42,6 +48,7 @@ class ListContainer extends Component {
     render() {
         const { title, listId, deleteList, createNewListItem} = this.props; 
         console.log("LIST ID: ", listId); 
+        console.log("createListItem fn: ", createNewListItem); 
         return(
             <div>
                 <List title={title} listId={listId} deleteList={deleteList}/>
@@ -50,7 +57,7 @@ class ListContainer extends Component {
                     return <ListItem body={listItem.body} id={listItem.id} deleteListItem={this.deleteListItem.bind(this)}/>
                 })
             }
-            <NewListItemForm value={this.state.listItemFormValue} onClick={(event) => (createNewListItem(this.state.listItemValue))} onChange={this.updateListItemForm.bind(this)}/>
+            <NewListItemForm value={this.state.listItemFormValue} clearNewListItemForm={this.clearNewListItemForm} createNewListItem={createNewListItem} onChange={this.updateListItemForm.bind(this)}/>
         
             </div>
         )

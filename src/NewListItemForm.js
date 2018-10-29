@@ -1,10 +1,10 @@
 import React from 'react'; 
 
-export default ({onClick, onChange, value}) => {
+export default ({createNewListItem, onChange, value, clearNewListItemForm}) => {
     return(
         <div>
             <input type="text" value={value} placeholder="Enter a new list item..." onChange={onChange}></input>
-            <button onClick={onClick}>Add</button>
+            <button onClick={(event) => createNewListItem(event, value, clearNewListItemForm) }>Add</button>
         </div>
     )
 }
