@@ -51,6 +51,15 @@ class ListsContainer extends Component {
         })
     }
 
+    deleteListItem = (event, listItemToDeleteId) => {
+        let filteredListItems = this.state.listItems.filter( listItem => {
+            return listItem.id !== listItemToDeleteId; 
+        })
+        this.setState({
+            listItems: filteredListItems
+        })
+    }
+
     getListItemsForList = (listId) => {
         return this.state.listItems.filter( listItem => {
             return listItem.listId === listId
@@ -68,6 +77,7 @@ class ListsContainer extends Component {
                             listId={list.listId} 
                             deleteList={this.deleteList.bind(this)}
                             createNewListItem={this.createNewListItem}
+                            deleteListItem={this.deleteListItem}
                         />
                     </Fragment>
                 ) 

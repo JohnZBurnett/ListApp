@@ -45,15 +45,19 @@ class ListContainer extends Component {
     }
 
     render() {
-        const { title, listId, deleteList, createNewListItem, listItems} = this.props; 
-        console.log("LIST ID: ", listId); 
-        console.log("createListItem fn: ", createNewListItem); 
+        const { title, listId, deleteList, deleteListItem, createNewListItem, listItems} = this.props; 
         return(
             <div>
                 <List title={title} listId={listId} deleteList={deleteList}/>
             {
                 listItems.map( listItem => {
-                    return <ListItem body={listItem.value} id={listItem.id} deleteListItem={this.deleteListItem.bind(this)}/>
+                    return(
+                        <ListItem 
+                          body={listItem.value} 
+                          id={listItem.id} 
+                          deleteListItem={deleteListItem}
+                        />
+                    ) 
                 })
             }
 
