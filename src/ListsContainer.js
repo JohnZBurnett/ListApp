@@ -33,8 +33,6 @@ class ListsContainer extends Component {
     }
 
     createNewListItem = (event, itemValue, listId, clearNewListItemForm) => {
-        console.log("ITEM LIST VALUE: ", itemValue);
-        console.log("THIS: ", this);  
         let listItemsPlusNewItem = [...this.state.listItems, { id: "item-" + ++this.listItemId, listId, value: itemValue}]
         this.setState({
             listItems: listItemsPlusNewItem
@@ -53,6 +51,12 @@ class ListsContainer extends Component {
         })
     }
 
+    getListItemsForList = (listId) => {
+        return this.state.listItems.filter( listItem => {
+            return listItem.listId === listId
+        })
+    }
+
     renderAllLists() {
         return(
             this.state.lists.map( list => {
@@ -60,7 +64,7 @@ class ListsContainer extends Component {
                     <Fragment>
                         <ListContainer 
                             title={list.title} 
-                            listItems={list.listItems} 
+                            listItems={this.getListItemsForList(list.listId)} 
                             listId={list.listId} 
                             deleteList={this.deleteList.bind(this)}
                             createNewListItem={this.createNewListItem}
@@ -74,7 +78,7 @@ class ListsContainer extends Component {
     render() {
         return(
             <div>
-                <div>This is the ListContainer.</div>
+                <h1>Welcome to the List App</h1>
                 <NewListForm 
                   onChange={this.updateNewListFormValue.bind(this)} 
                   onClick={this.createNewList.bind(this)} 
