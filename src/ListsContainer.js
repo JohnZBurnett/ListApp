@@ -38,7 +38,6 @@ class ListsContainer extends Component {
             if (list.listId === listId) {
                 list.listItems.push({ id: "item-" + ++this.listItemId, listId, value: itemValue})
             }
-            debugger; 
             return list; 
         });
         this.setState({
@@ -68,8 +67,24 @@ class ListsContainer extends Component {
         })
     }
 
-    onDragEnd = (result) => {
-        console.log("RESULT: ", result); 
+    onDragEnd = ({destination, source}) => {
+        console.log("DESTINATION: ", destination, "SOURCE: ", source); 
+
+        if (!destination) {
+            // if the drag did not end in a droppable area we abort
+            return; 
+        }
+        if (destination.droppableId === source.droppableId && destination.index === source.index) {
+            // we do nothing because the location hasn't changed 
+            return; 
+        }
+
+        this.state.lists.map( list => {
+            if (list.listId === destination.droppableId) {
+                console.log("WE'RE DROPPING IN THIS LIST: ", list); 
+            }
+        })
+
     }
 
     renderAllLists() {
