@@ -29,26 +29,15 @@ class ListContainer extends Component {
         const { title, listId, deleteList, deleteListItem, createNewListItem, listItems} = this.props; 
         return(
             <div>
-                <List title={title} listId={listId} deleteList={deleteList}/>
-            {
-                listItems.map( listItem => {
-                    return(
-                        <ListItem 
-                          body={listItem.value} 
-                          id={listItem.id} 
-                          deleteListItem={deleteListItem}
-                        />
-                    ) 
-                })
-            }
-
-            <NewListItemForm 
-              value={this.state.listItemFormValue} 
-              clearNewListItemForm={this.clearNewListItemForm} 
-              createNewListItem={createNewListItem} 
-              onChange={this.updateListItemForm.bind(this)}
-              listId={listId}
-            />
+              <List title={title} listId={listId} deleteList={deleteList} listItems={listItems} deleteListItem={deleteListItem}/>
+              
+              <NewListItemForm 
+                value={this.state.listItemFormValue} 
+                clearNewListItemForm={this.clearNewListItemForm} 
+                createNewListItem={createNewListItem} 
+                onChange={this.updateListItemForm.bind(this)}
+                listId={listId}
+                />
         
             </div>
         )
