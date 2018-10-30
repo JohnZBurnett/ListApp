@@ -120,7 +120,6 @@ class ListsContainer extends Component {
         return(
             this.state.lists.map( list => {
                 return(
-                    <DragDropContext onDragEnd={this.onDragEnd}>
                         <ListContainer 
                             title={list.title} 
                             listItems={list.listItems} 
@@ -129,7 +128,6 @@ class ListsContainer extends Component {
                             createNewListItem={this.createNewListItem}
                             deleteListItem={this.deleteListItem}
                         />
-                    </DragDropContext>
                 ) 
             })
         )
@@ -144,7 +142,10 @@ class ListsContainer extends Component {
                   onClick={this.createNewList.bind(this)} 
                   value={this.state.newListFormValue}
                 />
-                {this.renderAllLists()}
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                    {this.renderAllLists()}
+                </DragDropContext>
+               
             </div>
         )
     }
