@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import NewListForm from './NewListForm'; 
 import ListContainer from './ListContainer'; 
 import ListItem from './ListItem'; 
-
+import { DragDropContext } from 'react-beautiful-dnd';
 class ListsContainer extends Component {
 
     constructor() {
@@ -68,11 +68,15 @@ class ListsContainer extends Component {
         })
     }
 
+    onDragEnd = (result) => {
+        console.log("RESULT: ", result); 
+    }
+
     renderAllLists() {
         return(
             this.state.lists.map( list => {
                 return(
-                    <Fragment>
+                    <DragDropContext onDragEnd={this.onDragEnd}>
                         <ListContainer 
                             title={list.title} 
                             listItems={list.listItems} 
@@ -81,7 +85,7 @@ class ListsContainer extends Component {
                             createNewListItem={this.createNewListItem}
                             deleteListItem={this.deleteListItem}
                         />
-                    </Fragment>
+                    </DragDropContext>
                 ) 
             })
         )
