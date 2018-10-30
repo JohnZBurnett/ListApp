@@ -70,6 +70,7 @@ class ListsContainer extends Component {
 
     onDragEnd = (result) => {
         const {destination, source, draggableId} = result; 
+        console.log("SOURCE: ", source, "DESTINATION: ", destination); 
         if (!destination) {
             // if the drag did not end in a droppable area we abort
             return; 

@@ -7,10 +7,13 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
+  width: 30%;
 `;
 
 const List = styled.div`
-  paddin: 8px; 
+  padding: 8px; 
+  min-height: 100px;
+  background-color: ${ props => (props.isDraggingOver ? 'skyblue' : 'white')};
 `;
 
 const Item = styled.div``;
@@ -22,7 +25,7 @@ export default ({title, deleteList, listId, listItems, deleteListItem}) => {
         <Container>
             <h3>{title}</h3>
             <Droppable droppableId={listId}>
-            { (provided) => (
+            { (provided, snapshot) => (
                 <List ref={provided.innerRef} {...provided.droppableProps}>
                   {listItems.map( (listItem, index) => {
                     return(
@@ -32,10 +35,12 @@ export default ({title, deleteList, listId, listItems, deleteListItem}) => {
                           deleteListItem={deleteListItem}
                           index={index}
                           key={listItem.id}
+                          isDraggingOver={snapshot.isDraggingOver}
                         />
                     ) 
                 })}
-                 {provided.placeholder}
+                {console.log("PROVIDED: ", provided)}
+                {provided.placeholder}
                 </List>
             )
 
