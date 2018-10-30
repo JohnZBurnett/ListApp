@@ -69,11 +69,7 @@ class ListsContainer extends Component {
     }
 
     onDragEnd = (result) => {
-        console.log("RESULT: ", result); 
         const {destination, source, draggableId} = result; 
-        const draggedListItem = this.state.listItems.find( item => item.id === draggableId); 
-        console.log("DESTINATION: ", destination, "SOURCE: ", source, "DRAGGED ITEM: ", draggedListItem ); 
-
         if (!destination) {
             // if the drag did not end in a droppable area we abort
             return; 
@@ -82,12 +78,32 @@ class ListsContainer extends Component {
             // we do nothing because the location hasn't changed 
             return; 
         }
+        
+        const draggedListItem = this.state.listItems.find( item => item.id === draggableId); 
+        if (draggedListItem.listId !== destination.droppableId) {
+            draggedListItem.listId = destination.droppableId; 
+        }
 
-        this.state.lists.map( list => {
+        let updatedListsArr = this.state.lists.map( list => {
+
+            if (list.listId === source.droppableId) {
+                console.log("WE HIT THE REMOVAL SPLICE")
+                list.listItems.splice(source.index, 1); 
+            }
+
             if (list.listId === destination.droppableId) {
                 console.log("WE'RE DROPPING IN THIS LIST: ", list);  
+                list.listItems.splice(destination.index, 0, draggedListItem);
             }
+            
+            return list; 
         })
+
+        this.setState({
+            lists: updatedListsArr
+        })
+
+        
 
     }
 
