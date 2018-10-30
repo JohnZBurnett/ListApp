@@ -24,12 +24,14 @@ export default ({title, deleteList, listId, listItems, deleteListItem}) => {
             <Droppable droppableId={listId}>
             { (provided) => (
                 <List ref={provided.innerRef} {...provided.droppableProps}>
-                  {listItems.map( listItem => {
+                  {listItems.map( (listItem, index) => {
                     return(
                         <ListItem 
                           body={listItem.value} 
                           id={listItem.id} 
                           deleteListItem={deleteListItem}
+                          index={index}
+                          key={listItem.id}
                         />
                     ) 
                 })}
