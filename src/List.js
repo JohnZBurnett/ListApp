@@ -1,5 +1,4 @@
 import React from 'react';
-import { Droppable } from 'react-beautiful-dnd'; 
 import styled from 'styled-components'; 
 import ListItem from './ListItem'; 
 import NewListItemForm from './NewListItemForm'; 
@@ -12,10 +11,12 @@ const Container = styled.div`
 
 const List = styled.div`
   padding: 8px; 
-  min-height: 100px;
+  min-height: 200px;
 `;
 
-const Item = styled.div``;
+const DeleteButton = styled.button`
+ margin: 10px; 
+`
 
 
 
@@ -37,7 +38,7 @@ export default ({title, deleteList, listId, listItems, deleteListItem, onFormCha
                     ) 
                 })}
                 </List>
-            <button onClick={(event) => {deleteList(event, listId)}}>Delete List</button>
+            
             <NewListItemForm 
                value={formValue} 
                clearNewListItemForm={clearNewListItemForm} 
@@ -45,6 +46,7 @@ export default ({title, deleteList, listId, listItems, deleteListItem, onFormCha
                onChange={onFormChange}
                listId={listId}
             />
+            <DeleteButton onClick={(event) => {deleteList(event, listId)}}>Delete List</DeleteButton>
         </Container>
     )
 }

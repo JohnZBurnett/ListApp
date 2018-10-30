@@ -10,6 +10,10 @@ const Container = styled.div`
   background-color: ${ props => props.isDragging ? 'lightgreen' : 'white'}
 `
 
+const DeleteButton = styled.button`
+  float: right; 
+`
+
 export default ({ body, id, deleteListItem, listId, index }) => {
     return(
         <Draggable draggableId = {id} index={index}>
@@ -21,7 +25,7 @@ export default ({ body, id, deleteListItem, listId, index }) => {
                   isDragging={snapshot.isDragging}
                 >
                   {body}
-                  <button onClick={(event) => deleteListItem(event, id, listId)}>Delete</button>
+                  <DeleteButton onClick={(event) => deleteListItem(event, id, listId)}>Delete</DeleteButton>
                 </Container>
             )}
             

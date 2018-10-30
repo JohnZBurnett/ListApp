@@ -1,11 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const AddButton = styled.button`
+  margin-left: 5px;
+`
+
+const StyledInput = styled.input`
+  margin-left: 5px; 
+`
 
 export default ({ onChange, value, onClick }) => {
     return(
         <div>
-            <label>Enter a title for a new list</label>
-            <input type="text" name="newList" onChange={onChange} value={value}></input>
-            <button onClick={onClick}>Create List</button>
+            <StyledInput type="text" name="newList" placeholder="Enter a list title..." onChange={onChange} value={value}></StyledInput>
+            <AddButton onClick={onClick}>Create List</AddButton>
         </div>
     )
 }
