@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import List from './List'; 
 import { Droppable } from 'react-beautiful-dnd'; 
 
-const ListDiv = styled.div``; 
 
 const Container = styled.div`
   width: 30%;
@@ -39,7 +38,7 @@ class ListContainer extends Component {
             <Container>
               <Droppable droppableId={listId}>
               {(provided, snapshot) => (
-                  <ListDiv ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
+                  <div ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
                       <List 
                         title={title} 
                         listId={listId} 
@@ -52,7 +51,7 @@ class ListContainer extends Component {
                         onFormChange={this.updateListItemForm}
                       />
                       {provided.placeholder}
-                  </ListDiv>
+                  </div>
                   
               )}
                 </Droppable>

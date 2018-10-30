@@ -8,10 +8,14 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
+  display: flex;
+  flex-direction: column; 
 `;
 
 const List = styled.div`
   padding: 8px; 
+  min-height: 100px;
+  flex-grow: 1;
   min-height: 100px;
 `;
 

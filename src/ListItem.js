@@ -8,6 +8,7 @@ const Container = styled.div`
   padding: 8px;
   margin-bottom: 8px; 
   background-color: ${ props => props.isDragging ? 'lightgreen' : 'white'}
+  
 `
 
 export default ({ body, id, deleteListItem, listId, index }) => {
