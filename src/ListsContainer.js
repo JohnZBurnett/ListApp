@@ -33,6 +33,7 @@ class ListsContainer extends Component {
     }
 
     createNewListItem = (event, itemValue, listId, clearNewListItemForm) => {
+        debugger; 
         let newListItem = { id: "item-" + ++this.listItemId, listId, value: itemValue};
         let listItemsPlusNewItem = [...this.state.listItems, newListItem]
         let updatedLists = this.state.lists.map( list => {
@@ -59,12 +60,19 @@ class ListsContainer extends Component {
         })
     }
 
-    deleteListItem = (event, listItemToDeleteId) => {
+    deleteListItem = (event, listItemToDeleteId, listId) => {
         let filteredListItems = this.state.listItems.filter( listItem => {
             return listItem.id !== listItemToDeleteId; 
         })
+        let filteredLists = this.state.lists.map( list => {
+            list.listItems = list.listItems.filter( listItem => {
+                return listItem.id !== listItemToDeleteId; 
+            })
+            return list; 
+        })
         this.setState({
-            listItems: filteredListItems
+            listItems: filteredListItems,
+            lists: filteredLists
         })
     }
 

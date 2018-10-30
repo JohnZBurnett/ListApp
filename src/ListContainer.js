@@ -3,8 +3,12 @@ import ListItem from './ListItem';
 import styled from 'styled-components';
 import List from './List'; 
 import NewListItemForm from './NewListItemForm'; 
+import { Droppable } from 'react-beautiful-dnd'; 
 
-const Container = styled.div``; 
+const ListDiv = styled.div`
+background-color: ${ props => (props.isDraggingOver ? 'skyblue' : 'white')}
+display-style: inline-block; 
+`; 
 
 
 class ListContainer extends Component {
@@ -15,7 +19,7 @@ class ListContainer extends Component {
         }
     }
 
-    updateListItemForm(event) {
+    updateListItemForm = (event) => {
         let newValue = event.target.value;
         this.setState({
             listItemFormValue: newValue
@@ -32,15 +36,25 @@ class ListContainer extends Component {
         const { title, listId, deleteList, deleteListItem, createNewListItem, listItems} = this.props; 
         return(
             <div>
-              <List title={title} listId={listId} deleteList={deleteList} listItems={listItems} deleteListItem={deleteListItem}/>
-              
-              <NewListItemForm 
-                value={this.state.listItemFormValue} 
-                clearNewListItemForm={this.clearNewListItemForm} 
-                createNewListItem={createNewListItem} 
-                onChange={this.updateListItemForm.bind(this)}
-                listId={listId}
-                />
+              <Droppable droppableId={listId}>
+              {(provided, snapshot) => (
+                  <ListDiv ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
+                      <List 
+                        title={title} 
+                        listId={listId} 
+                        deleteList={deleteList} 
+                        listItems={listItems} 
+                        deleteListItem={deleteListItem}
+                        formValue={this.state.listItemFormValue} 
+                        clearNewListItemForm={this.clearNewListItemForm} 
+                        createNewListItem={createNewListItem} 
+                        onFormChange={this.updateListItemForm}
+                      />
+                      {provided.placeholder}
+                  </ListDiv>
+                  
+              )}
+                </Droppable>
         
             </div>
         )

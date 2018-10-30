@@ -2,6 +2,7 @@ import React from 'react';
 import { Droppable } from 'react-beautiful-dnd'; 
 import styled from 'styled-components'; 
 import ListItem from './ListItem'; 
+import NewListItemForm from './NewListItemForm'; 
 
 const Container = styled.div`
   margin: 8px;
@@ -13,20 +14,17 @@ const Container = styled.div`
 const List = styled.div`
   padding: 8px; 
   min-height: 100px;
-  background-color: ${ props => (props.isDraggingOver ? 'skyblue' : 'white')};
 `;
 
 const Item = styled.div``;
 
 
 
-export default ({title, deleteList, listId, listItems, deleteListItem}) => {
+export default ({title, deleteList, listId, listItems, deleteListItem, onFormChange, createNewListItem, clearNewListItemForm, formValue}) => {
     return(
         <Container>
             <h3>{title}</h3>
-            <Droppable droppableId={listId}>
-            { (provided, snapshot) => (
-                <List ref={provided.innerRef} {...provided.droppableProps}>
+                <List>
                   {listItems.map( (listItem, index) => {
                     return(
                         <ListItem 
@@ -34,19 +32,20 @@ export default ({title, deleteList, listId, listItems, deleteListItem}) => {
                           id={listItem.id} 
                           deleteListItem={deleteListItem}
                           index={index}
+                          listId={listId}
                           key={listItem.id}
-                          isDraggingOver={snapshot.isDraggingOver}
                         />
                     ) 
                 })}
-                {console.log("PROVIDED: ", provided)}
-                {provided.placeholder}
                 </List>
-            )
-
-            }
-            </Droppable>
             <button onClick={(event) => {deleteList(event, listId)}}>Delete List</button>
+            <NewListItemForm 
+               value={formValue} 
+               clearNewListItemForm={clearNewListItemForm} 
+               createNewListItem={createNewListItem} 
+               onChange={onFormChange}
+               listId={listId}
+            />
         </Container>
     )
 }
