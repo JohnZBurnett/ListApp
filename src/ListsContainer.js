@@ -1,7 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import NewListForm from './NewListForm'; 
 import ListContainer from './ListContainer'; 
-import ListItem from './ListItem'; 
 import { DragDropContext } from 'react-beautiful-dnd';
 class ListsContainer extends Component {
 
@@ -33,7 +32,6 @@ class ListsContainer extends Component {
     }
 
     createNewListItem = (event, itemValue, listId, clearNewListItemForm) => {
-        debugger; 
         let newListItem = { id: "item-" + ++this.listItemId, listId, value: itemValue};
         let listItemsPlusNewItem = [...this.state.listItems, newListItem]
         let updatedLists = this.state.lists.map( list => {
@@ -78,7 +76,6 @@ class ListsContainer extends Component {
 
     onDragEnd = (result) => {
         const {destination, source, draggableId} = result; 
-        console.log("SOURCE: ", source, "DESTINATION: ", destination); 
         if (!destination) {
             // if the drag did not end in a droppable area we abort
             return; 
@@ -96,12 +93,10 @@ class ListsContainer extends Component {
         let updatedListsArr = this.state.lists.map( list => {
 
             if (list.listId === source.droppableId) {
-                console.log("WE HIT THE REMOVAL SPLICE")
                 list.listItems.splice(source.index, 1); 
             }
 
             if (list.listId === destination.droppableId) {
-                console.log("WE'RE DROPPING IN THIS LIST: ", list);  
                 list.listItems.splice(destination.index, 0, draggedListItem);
             }
             

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import ListItem from './ListItem';
 import styled from 'styled-components';
 import List from './List'; 
-import NewListItemForm from './NewListItemForm'; 
 import { Droppable } from 'react-beautiful-dnd'; 
 
-const ListDiv = styled.div`
-background-color: ${ props => (props.isDraggingOver ? 'skyblue' : 'white')}
-display-style: inline-block; 
-`; 
+const ListDiv = styled.div``; 
+
+const Container = styled.div`
+  width: 30%;
+  display: inline-block; 
+  padding: 10px;
+`;
 
 
 class ListContainer extends Component {
@@ -35,7 +36,7 @@ class ListContainer extends Component {
     render() {
         const { title, listId, deleteList, deleteListItem, createNewListItem, listItems} = this.props; 
         return(
-            <div>
+            <Container>
               <Droppable droppableId={listId}>
               {(provided, snapshot) => (
                   <ListDiv ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
@@ -56,7 +57,7 @@ class ListContainer extends Component {
               )}
                 </Droppable>
         
-            </div>
+            </Container>
         )
     }
 
