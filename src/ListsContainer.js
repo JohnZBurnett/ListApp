@@ -33,10 +33,11 @@ class ListsContainer extends Component {
     }
 
     createNewListItem = (event, itemValue, listId, clearNewListItemForm) => {
-        let listItemsPlusNewItem = [...this.state.listItems, { id: "item-" + ++this.listItemId, listId, value: itemValue}]
+        let newListItem = { id: "item-" + ++this.listItemId, listId, value: itemValue};
+        let listItemsPlusNewItem = [...this.state.listItems, newListItem]
         let updatedLists = this.state.lists.map( list => {
             if (list.listId === listId) {
-                list.listItems.push({ id: "item-" + ++this.listItemId, listId, value: itemValue})
+                list.listItems.push(newListItem)
             }
             return list; 
         });
@@ -67,8 +68,11 @@ class ListsContainer extends Component {
         })
     }
 
-    onDragEnd = ({destination, source}) => {
-        console.log("DESTINATION: ", destination, "SOURCE: ", source); 
+    onDragEnd = (result) => {
+        console.log("RESULT: ", result); 
+        const {destination, source, draggableId} = result; 
+        const draggedListItem = this.state.listItems.find( item => item.id === draggableId); 
+        console.log("DESTINATION: ", destination, "SOURCE: ", source, "DRAGGED ITEM: ", draggedListItem ); 
 
         if (!destination) {
             // if the drag did not end in a droppable area we abort
@@ -81,7 +85,7 @@ class ListsContainer extends Component {
 
         this.state.lists.map( list => {
             if (list.listId === destination.droppableId) {
-                console.log("WE'RE DROPPING IN THIS LIST: ", list); 
+                console.log("WE'RE DROPPING IN THIS LIST: ", list);  
             }
         })
 
