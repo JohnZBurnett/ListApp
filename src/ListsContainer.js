@@ -68,12 +68,6 @@ class ListsContainer extends Component {
         })
     }
 
-    getListItemsForList = (listId) => {
-        return this.state.listItems.filter( listItem => {
-            return listItem.listId === listId
-        })
-    }
-
     renderAllLists() {
         return(
             this.state.lists.map( list => {
@@ -81,7 +75,7 @@ class ListsContainer extends Component {
                     <Fragment>
                         <ListContainer 
                             title={list.title} 
-                            listItems={this.getListItemsForList(list.listId)} 
+                            listItems={list.listItems} 
                             listId={list.listId} 
                             deleteList={this.deleteList.bind(this)}
                             createNewListItem={this.createNewListItem}
