@@ -6,9 +6,10 @@ This is a simple list application which allows users to create lists, add items 
 Please refer to these steps to run the application locally:
 
 1) Clone the repository to your machine.
-2) Navigate into the root level of the project.
-3) Execute the "start" script for the project using your preferred tool (for example, "yarn start" with Yarn, or "npm run start" with NPM). 
-4) The script will start the app in port 3000 by default. A new tab will be opened in your browser at the address of the app, which will then be available for use. Should the port be occupied, the app will ask in Terminal if another port should be used.  
+2) Install project dependencies using your preferred project manager (for example, "yarn install" with Yarn, or "npm install" with NPM). 
+3) Navigate into the root level of the project.
+4) Execute the "start" script for the project using your preferred tool (for example, "yarn start" with Yarn, or "npm run start" with NPM). 
+5) The script will start the app in port 3000 by default. A new tab will be opened in your browser at the address of the app, which will then be available for use. Should the port be occupied, the app will ask in Terminal if another port should be used.  
 
 ## Using the App
 
